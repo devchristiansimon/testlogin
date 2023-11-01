@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <main>
         <h1>Backend</h1>
-        <Link href="/login">Login</Link>
+        <Link href="/backend/login">Login</Link>
       </main>
     </>
   );

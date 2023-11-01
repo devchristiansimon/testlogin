@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Login() {
   const [benutzer, setBenutzer] = useState(null);
@@ -8,14 +9,22 @@ export default function Login() {
   const router = useRouter();
 
   const login = async (event) => {
-    // alert(benutzer + " " + passwort);
     event.preventDefault();
-    router.push("/backend");
+    try {
+      await axios.post("http://localhost:3000/api/login", {
+        benutzer,
+        passwort,
+      });
+      router.push("/backend");
+    } catch {
+      setError(true);
+    }
   };
 
   return (
     <div>
       <h2>Login</h2>
+      {error && <h2>Login fehlgeschlagen!</h2>}
       <div>
         <form>
           <input type="text" onChange={(e) => setBenutzer(e.target.value)} />
